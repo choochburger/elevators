@@ -26,11 +26,15 @@ class App extends Component {
     };
   }
 
+  handleRequest(req) {
+    console.log(req);
+  }
+
   render() {
     return (
       <div className="app">
         <Building numFloors={5} elevators={this.state.elevators} />
-        <Controls numFloors={5} />
+        <Controls numFloors={5} onRequest={this.handleRequest} />
       </div>
     );
   }

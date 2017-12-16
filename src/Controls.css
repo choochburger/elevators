@@ -32,6 +32,10 @@
   height: 50px;
 }
 
+.direction-control-selected {
+  border-color: #2b0cea;
+}
+
 .direction-control-up {
   transform: rotate(-90deg);
 }
