@@ -12,10 +12,7 @@ class Elevator extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.floor !== this.state.floor) {
-      const height = this.el.clientHeight;
-      this.setState({
-        bottom: nextProps.floor * height,
-      });
+      this.updatePosition(nextProps.floor);
     }
   }
 
@@ -27,6 +24,13 @@ class Elevator extends Component {
         ref={el => (this.el = el)}
       />
     );
+  }
+
+  updatePosition(floor) {
+    const height = this.el.clientHeight;
+    this.setState({
+      bottom: floor * height,
+    });
   }
 }
 

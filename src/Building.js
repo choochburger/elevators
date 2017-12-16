@@ -5,11 +5,10 @@ import './Building.css';
 
 class Building extends Component {
   render() {
-    const numShafts = this.props.numElevators;
     return (
       <div className="building">
-        {[...Array(numShafts)].map((_, i) => (
-          <Shaft numFloors={this.props.numFloors} key={i} />
+        {this.props.elevators.map((elevator, i) => (
+          <Shaft elevator={elevator} numFloors={this.props.numFloors} key={i} />
         ))}
       </div>
     );
@@ -18,7 +17,7 @@ class Building extends Component {
 
 Building.propTypes = {
   numFloors: PropTypes.number.isRequired,
-  numElevators: PropTypes.number.isRequired,
+  elevators: PropTypes.array.isRequired,
 };
 
 export default Building;

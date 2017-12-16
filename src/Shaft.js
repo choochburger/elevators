@@ -7,12 +7,14 @@ import './Shaft.css';
 class Shaft extends Component {
   constructor(props) {
     super(props);
-    this.sizeShaft = this.sizeShaft.bind(this);
     this.state = {
-      currentFloor: 0,
       width: 100,
       height: 50,
     };
+  }
+
+  componentDidMount() {
+    this.resize();
   }
 
   render() {
@@ -25,16 +27,15 @@ class Shaft extends Component {
         }}
       >
         <Elevator
-          floor={this.state.currentFloor}
-          numFloors={this.props.numFloors}
-          ref={this.sizeShaft}
+          floor={this.props.elevator.floor}
+          ref={el => (this.elevator = el)}
         />
       </div>
     );
   }
 
-  sizeShaft(elevator) {
-    const elevatorNode = ReactDOM.findDOMNode(elevator);
+  resize() {
+    const elevatorNode = ReactDOM.findDOMNode(this.elevator);
     const elevatorWidth = elevatorNode.clientWidth;
     const elevatorHeight = elevatorNode.clientHeight;
     const shaftHeight = this.props.numFloors * elevatorHeight;
@@ -46,6 +47,7 @@ class Shaft extends Component {
 }
 
 Shaft.propTypes = {
+  elevator: PropTypes.object.isRequired,
   numFloors: PropTypes.number.isRequired,
 };
 
