@@ -4,7 +4,7 @@ import Controls from './Controls';
 import Queue from './Queue';
 import './App.css';
 
-let id = 0;
+let idCounter = 0;
 
 class App extends Component {
   constructor(props) {
@@ -15,17 +15,32 @@ class App extends Component {
         {
           id: 0,
           floor: 0,
-          destination: null,
+          pickupFloor: null,
+          dropoffFloor: null,
         },
         {
           id: 1,
           floor: 0,
-          destination: null,
+          pickupFloor: null,
+          dropoffFloor: null,
         },
         {
           id: 2,
-          floor: 0,
-          destination: null,
+          floor: 3,
+          pickupFloor: null,
+          dropoffFloor: null,
+        },
+        {
+          id: 3,
+          floor: 2,
+          pickupFloor: null,
+          dropoffFloor: null,
+        },
+        {
+          id: 4,
+          floor: 2,
+          pickupFloor: null,
+          dropoffFloor: null,
         },
       ],
       requests: [],
@@ -40,49 +55,62 @@ class App extends Component {
 
   handleRequest(req) {
     const requests = this.state.requests.slice();
-    requests.push({ ...req, id: id++ });
+    requests.push({ ...req, id: idCounter++ });
     this.setState({ requests: requests });
   }
 
   update() {
     // TODO: move this logic into a main logic controller...
 
-    // Grab first empty elevator and send to destination
+    // Grab first empty elevator and send topickupFloor
 
     const elevators = this.state.elevators.slice();
     const requests = this.state.requests.slice();
 
+    function isIdle(elevator) {
+      return elevator.pickupFloor === null && elevator.dropoffFloor === null;
+    }
+
+    function isInTransit(elevator) {
+      return !isIdle(elevator);
+    }
+
     // Assign idle elevators
-    elevators
-      .filter(elevator => elevator.destination === null)
-      .forEach(unassignedElevator => {
-        if (requests.length) {
-          const request = requests.pop();
-          unassignedElevator.destination = request.endFloor;
-        }
-      });
+    elevators.filter(isIdle).forEach(elevator => {
+      if (requests.length) {
+        const request = requests.pop();
+        elevator.pickupFloor = request.pickupFloor;
+        elevator.dropoffFloor = request.dropoffFloor;
+      }
+    });
 
     // Move assigned elevators one floor at a time
-    elevators
-      .filter(elevator => elevator.destination !== null)
-      .forEach(assignedElevator => {
-        if (assignedElevator.floor === assignedElevator.destination) {
-          assignedElevator.destination = null;
+    elevators.filter(isInTransit).forEach(elevator => {
+      if (elevator.pickupFloor !== null) {
+        if (elevator.floor === elevator.pickupFloor) {
+          elevator.pickupFloor = null;
+        } else if (elevator.floor < elevator.pickupFloor) {
+          elevator.floor++;
         } else {
-          if (assignedElevator.floor < assignedElevator.destination) {
-            assignedElevator.floor++;
-          } else {
-            assignedElevator.floor--;
-          }
+          elevator.floor--;
         }
-      });
+      } else if (elevator.dropoffFloor !== null) {
+        if (elevator.floor === elevator.dropoffFloor) {
+          elevator.dropoffFloor = null;
+        } else if (elevator.floor < elevator.dropoffFloor) {
+          elevator.floor++;
+        } else {
+          elevator.floor--;
+        }
+      }
+    });
 
     this.setState(
       {
         elevators: elevators,
         requests: requests,
       },
-      () => setTimeout(this.update, 3000),
+      () => setTimeout(this.update, 1000),
     );
   }
 

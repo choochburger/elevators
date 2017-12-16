@@ -4,16 +4,16 @@ import classNames from 'classnames';
 import './Controls.css';
 
 const initialState = {
-  startFloor: 0,
-  endFloor: 0,
+  pickupFloor: 0,
+  dropoffFloor: 0,
   direction: 'up',
 };
 
 class Controls extends Component {
   constructor(props) {
     super(props);
-    this.updateStartFloor = this.updateStartFloor.bind(this);
-    this.updateEndFloor = this.updateEndFloor.bind(this);
+    this.updatePickupFloor = this.updatePickupFloor.bind(this);
+    this.updateDropoffFloor = this.updateDropoffFloor.bind(this);
     this.submitRequest = this.submitRequest.bind(this);
     this.state = initialState;
   }
@@ -22,17 +22,16 @@ class Controls extends Component {
     this.setState(initialState);
   }
 
-  updateStartFloor(e) {
-    this.setState({ startFloor: Number(e.target.value) });
+  updatePickupFloor(e) {
+    this.setState({ pickupFloor: Number(e.target.value) });
   }
 
-  updateEndFloor(e) {
-    this.setState({ endFloor: Number(e.target.value) });
+  updateDropoffFloor(e) {
+    this.setState({ dropoffFloor: Number(e.target.value) });
   }
 
   submitRequest() {
     this.props.onRequest(this.state);
-    this.resetState();
   }
 
   render() {
@@ -41,8 +40,8 @@ class Controls extends Component {
         <div className="controls">
           <Menu
             num={this.props.numFloors}
-            value={this.state.startFloor}
-            onChange={this.updateStartFloor}
+            value={this.state.pickupFloor}
+            onChange={this.updatePickupFloor}
             label={'Start floor'}
           />
           <div className="direction-controls">
@@ -67,8 +66,8 @@ class Controls extends Component {
           </div>
           <Menu
             num={this.props.numFloors}
-            value={this.state.endFloor}
-            onChange={this.updateEndFloor}
+            value={this.state.dropoffFloor}
+            onChange={this.updateDropoffFloor}
             label={'End floor'}
           />
           <button className="controls-go" onClick={this.submitRequest}>
