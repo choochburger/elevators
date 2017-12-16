@@ -1,6 +1,36 @@
 .elevator {
-  background: #ccc;
+  background: linear-gradient(
+    to right,
+    #f2f6f8 0%,
+    #d8e1e7 50%,
+    #b5c6d0 51%,
+    #e0eff9 100%
+  );
   width: 100px;
   height: 120px;
   position: absolute;
+  &:hover {
+    & .elevator-controls {
+      display: flex;
+    }
+  }
+}
+
+.elevator-controls {
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.elevator-controls-control {
+  background: white;
+  border-radius: 40px;
+  cursor: pointer;
+  margin: 2px;
+  padding: 12px;
+  text-align: center;
+  width: 40px;
+  height: 40px;
 }

@@ -22,7 +22,12 @@ class Elevator extends Component {
         className="elevator"
         style={{ bottom: this.state.bottom }}
         ref={el => (this.el = el)}
-      />
+      >
+        <div className="elevator-controls">
+          <button className="elevator-controls-control">^</button>
+          <button className="elevator-controls-control">v</button>
+        </div>
+      </div>
     );
   }
 
