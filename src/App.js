@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import Building from './Building';
 import Controls from './Controls';
+import Queue from './Queue';
 import './App.css';
+
+let id = 0;
 
 class App extends Component {
   constructor(props) {
@@ -13,13 +16,15 @@ class App extends Component {
           floor: 0,
         },
         {
-          floor: 4,
+          floor: 0,
         },
         {
-          floor: 2,
+          floor: 0,
         },
       ],
+      requests: [],
     };
+    this.handleRequest = this.handleRequest.bind(this);
 
     window.updateElevators = elevators => {
       this.setState({ elevators: elevators });
@@ -27,14 +32,23 @@ class App extends Component {
   }
 
   handleRequest(req) {
-    console.log(req);
+    const requests = this.state.requests.slice();
+    requests.push({ ...req, id: id++ });
+    this.setState({ requests: requests });
   }
 
   render() {
     return (
       <div className="app">
-        <Building numFloors={5} elevators={this.state.elevators} />
-        <Controls numFloors={5} onRequest={this.handleRequest} />
+        <Building
+          numFloors={this.state.floors}
+          elevators={this.state.elevators}
+        />
+        <Controls
+          numFloors={this.state.floors}
+          onRequest={this.handleRequest}
+        />
+        <Queue requests={this.state.requests} />
       </div>
     );
   }

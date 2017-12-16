@@ -1,0 +1,9 @@
+.queue {
+  margin: 0 auto;
+}
+
+.queue-item {
+  background: #ccc;
+  border: 1px solid white;
+  padding: 8px;
+}
