@@ -43,6 +43,7 @@ class Controls extends Component {
             num={this.props.numFloors}
             value={this.state.startFloor}
             onChange={this.updateStartFloor}
+            label={'Start floor'}
           />
           <div className="direction-controls">
             <button
@@ -68,6 +69,7 @@ class Controls extends Component {
             num={this.props.numFloors}
             value={this.state.endFloor}
             onChange={this.updateEndFloor}
+            label={'End floor'}
           />
           <button className="controls-go" onClick={this.submitRequest}>
             Go!
@@ -80,13 +82,16 @@ class Controls extends Component {
 
 function Menu(props) {
   return (
-    <select onChange={props.onChange} value={props.value}>
-      {[...Array(props.num)].map((_, i) => (
-        <option val={i} key={i}>
-          {i}
-        </option>
-      ))}
-    </select>
+    <label>
+      {props.label}
+      <select onChange={props.onChange} value={props.value}>
+        {[...Array(props.num)].map((_, i) => (
+          <option val={i} key={i}>
+            {i}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 
