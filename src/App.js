@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Building from './Building';
+import Controls from './Controls';
 import './App.css';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
     return (
       <div className="app">
         <Building numFloors={5} elevators={this.state.elevators} />
+        <Controls numFloors={5} />
       </div>
     );
   }
