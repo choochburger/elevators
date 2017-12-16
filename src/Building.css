@@ -1,0 +1,7 @@
+.building {
+  background: linear-gradient(to bottom, #606c88 0%, #3f4c6b 100%);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
