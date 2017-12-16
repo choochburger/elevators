@@ -9,6 +9,7 @@ class Shaft extends Component {
     super(props);
     this.sizeShaft = this.sizeShaft.bind(this);
     this.state = {
+      currentFloor: 0,
       width: 100,
       height: 50,
     };
@@ -24,7 +25,7 @@ class Shaft extends Component {
         }}
       >
         <Elevator
-          currentFloor={0}
+          floor={this.state.currentFloor}
           numFloors={this.props.numFloors}
           ref={this.sizeShaft}
         />
