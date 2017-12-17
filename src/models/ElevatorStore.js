@@ -22,6 +22,29 @@ class ElevatorStore {
         elevator.dropoffFloor = elevatorRequest.dropoffFloor;
       }
     });
+    this.updateElevators();
+  }
+
+  @action
+  updateElevators() {
+    function updateElevator(elevator, floor) {
+      // Move assigned elevators one floor at a time
+      if (elevator.floor === elevator[floor]) {
+        elevator[floor] = null;
+      } else if (elevator.floor < elevator[floor]) {
+        elevator.moveUp();
+      } else {
+        elevator.moveDown();
+      }
+    }
+
+    this.elevators.forEach(elevator => {
+      if (typeof elevator.pickupFloor === 'number') {
+        return updateElevator(elevator, 'pickupFloor');
+      } else if (typeof elevator.dropoffFloor === 'number') {
+        return updateElevator(elevator, 'dropoffFloor');
+      }
+    });
   }
 }
 

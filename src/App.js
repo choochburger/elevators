@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Building from './Building';
 import Controls from './Controls';
 import Queue from './Queue';
-import Brain from './Brain';
 import { Provider } from 'mobx-react';
 import ElevatorStore from './models/ElevatorStore';
 import ElevatorRequestStore from './models/ElevatorRequestStore';
-import DevTools from 'mobx-react-devtools';
 import './App.css';
 
 class App extends Component {
@@ -23,13 +21,9 @@ class App extends Component {
   }
 
   update() {
-    const { elevators } = this.elevatorStore;
     const { elevatorRequests } = this.elevatorRequestStore;
     this.elevatorStore.handleElevatorRequests(elevatorRequests);
-    Brain.updateElevators(elevators);
-    this.setState({ elevators: elevators }, () =>
-      setTimeout(this.update, this.updateIntervalMs),
-    );
+    setTimeout(this.update, this.updateIntervalMs);
   }
 
   render() {
