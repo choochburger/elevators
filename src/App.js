@@ -24,7 +24,8 @@ class App extends Component {
 
   update() {
     const { elevators } = this.elevatorStore;
-    Brain.processRequests(elevators, this.elevatorRequestStore.requests);
+    const { elevatorRequests } = this.elevatorRequestStore;
+    this.elevatorStore.handleElevatorRequests(elevatorRequests);
     Brain.updateElevators(elevators);
     this.setState({ elevators: elevators }, () =>
       setTimeout(this.update, this.updateIntervalMs),
@@ -39,7 +40,6 @@ class App extends Component {
         elevatorRequestStore={this.elevatorRequestStore}
       >
         <div className="app">
-          <DevTools />
           <Building />
           <Controls />
           <Queue />

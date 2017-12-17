@@ -8,8 +8,21 @@ class ElevatorStore {
     [...Array(numElevators)].forEach(() => this.elevators.push(new Elevator()));
   }
 
+  @computed
+  get idleElevators() {
+    return this.elevators.filter(e => e.isIdle);
+  }
+
   @action
-  handleRequest(elevatorRequest) {}
+  handleElevatorRequests(elevatorRequests) {
+    this.idleElevators.forEach(elevator => {
+      if (elevatorRequests.length) {
+        const elevatorRequest = elevatorRequests.pop();
+        elevator.pickupFloor = elevatorRequest.pickupFloor;
+        elevator.dropoffFloor = elevatorRequest.dropoffFloor;
+      }
+    });
+  }
 }
 
 class Elevator {

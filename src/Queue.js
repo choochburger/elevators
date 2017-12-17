@@ -6,12 +6,18 @@ import './Queue.css';
 @observer
 class Queue extends Component {
   render() {
-    const { requests } = this.props.elevatorRequestStore;
+    const { elevatorRequests } = this.props.elevatorRequestStore;
     return (
       <div className="queue">
-        {requests.map(request => (
-          <QueueItem request={request} key={request.id} />
-        ))}
+        <h3>Pending:</h3>
+        {elevatorRequests.length
+          ? elevatorRequests.map(elevatorRequest => (
+              <QueueItem
+                elevatorRequest={elevatorRequest}
+                key={elevatorRequest.id}
+              />
+            ))
+          : 'All elevator requests fulfilled'}
       </div>
     );
   }
@@ -21,7 +27,9 @@ class Queue extends Component {
 class QueueItem extends Component {
   render() {
     return (
-      <div className="queue-item">{JSON.stringify(this.props.request)}</div>
+      <div className="queue-item">
+        {JSON.stringify(this.props.elevatorRequest)}
+      </div>
     );
   }
 }

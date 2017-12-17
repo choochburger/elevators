@@ -2,12 +2,12 @@ import { action, observable } from 'mobx';
 import uuid from 'uuid';
 
 class ElevatorRequestStore {
-  @observable requests = [];
+  @observable elevatorRequests = [];
 
   @action
   createRequest(pickupFloor, dropoffFloor) {
     const request = new ElevatorRequest(pickupFloor, dropoffFloor);
-    this.requests.push(request);
+    this.elevatorRequests.push(request);
   }
 }
 
