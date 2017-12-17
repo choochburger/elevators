@@ -1,7 +1,7 @@
 import { action, observable } from 'mobx';
 import uuid from 'uuid';
 
-class RequestStore {
+class ElevatorRequestStore {
   @observable requests = [];
 
   @action
@@ -18,11 +18,10 @@ class ElevatorRequest {
   @observable dropoffFloor;
 
   constructor(pickupFloor, dropoffFloor) {
-    console.log(arguments);
     this.id = uuid.v4();
     this.pickupFloor = pickupFloor;
     this.dropoffFloor = dropoffFloor;
   }
 }
 
-export default RequestStore;
+export default ElevatorRequestStore;

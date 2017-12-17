@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import './Queue.css';
 
-@inject('requestStore')
+@inject('elevatorRequestStore')
 @observer
 class Queue extends Component {
   render() {
+    const { requests } = this.props.elevatorRequestStore;
     return (
       <div className="queue">
-        {this.props.requestStore.requests.map(request => (
+        {requests.map(request => (
           <QueueItem request={request} key={request.id} />
         ))}
       </div>

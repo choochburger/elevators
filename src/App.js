@@ -4,7 +4,7 @@ import Controls from './Controls';
 import Queue from './Queue';
 import Brain from './Brain';
 import { Provider } from 'mobx-react';
-import RequestStore from './models/RequestStore';
+import ElevatorRequestStore from './models/ElevatorRequestStore';
 import DevTools from 'mobx-react-devtools';
 import './App.css';
 
@@ -38,7 +38,7 @@ class App extends Component {
       },
       props.savedState,
     );
-    this.requestStore = new RequestStore();
+    this.elevatorRequestStore = new ElevatorRequestStore();
     this.update = this.update.bind(this);
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
 
   update() {
     const { elevators } = this.state;
-    Brain.processRequests(elevators, this.requestStore.requests);
+    Brain.processRequests(elevators, this.elevatorRequestStore.requests);
     Brain.updateElevators(elevators);
     this.setState({ elevators: elevators }, () =>
       setTimeout(this.update, this.state.updateIntervalMs),
@@ -57,7 +57,7 @@ class App extends Component {
 
   render() {
     return (
-      <Provider numFloors={5} requestStore={this.requestStore}>
+      <Provider numFloors={5} elevatorRequestStore={this.elevatorRequestStore}>
         <div className="app">
           <DevTools />
           <Building elevators={this.state.elevators} />

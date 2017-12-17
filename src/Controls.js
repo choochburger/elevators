@@ -3,7 +3,7 @@ import Menu from './Menu';
 import './Controls.css';
 import { inject } from 'mobx-react';
 
-@inject('numFloors', 'requestStore')
+@inject('numFloors', 'elevatorRequestStore')
 class Controls extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ class Controls extends Component {
   }
 
   createRequest() {
-    this.props.requestStore.createRequest(
+    this.props.elevatorRequestStore.createRequest(
       this.state.pickupFloor,
       this.state.dropoffFloor,
     );
