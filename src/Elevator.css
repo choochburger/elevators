@@ -1,15 +1,7 @@
 .elevator {
-  background: linear-gradient(
-    to right,
-    #f2f6f8 0%,
-    #d8e1e7 50%,
-    #b5c6d0 51%,
-    #e0eff9 100%
-  );
+  background-image: url('./elevator.svg');
+  background-size: 100% 100%;
   width: 100px;
   height: 120px;
   position: absolute;
 }
-
-
-
