@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = props.savedState || {
       floors: 5,
+      updateIntervalMs: 1000,
       elevators: [
         {
           id: 0,
@@ -59,7 +60,7 @@ class App extends Component {
         elevators: Brain.updateElevators(elevators),
         requests: requests,
       },
-      () => setTimeout(this.update, 1000),
+      () => setTimeout(this.update, this.state.updateIntervalMs),
     );
   }
 
