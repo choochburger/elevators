@@ -3,9 +3,25 @@ import Building from './Building';
 import Controls from './Controls';
 import Queue from './Queue';
 import Brain from './Brain';
+import { Provider } from 'mobx-react';
 import './App.css';
 
 let idCounter = 0;
+
+/*
+MobX notes...
+
+  Use MobX in strict mode!
+
+  Use actions
+
+  Use DevTools
+
+  Create stores at root of application
+
+  Use Provider component to wrap app and access data
+
+*/
 
 class App extends Component {
   constructor(props) {
@@ -66,17 +82,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Building
-          numFloors={this.state.floors}
-          elevators={this.state.elevators}
-        />
-        <Controls
-          numFloors={this.state.floors}
-          onRequest={this.handleRequest}
-        />
-        <Queue requests={this.state.requests} />
-      </div>
+      <Provider numFloors={5}>
+        <div className="app">
+          <Building elevators={this.state.elevators} />
+          <Controls onRequest={this.handleRequest} />
+          <Queue requests={this.state.requests} />
+        </div>
+      </Provider>
     );
   }
 }

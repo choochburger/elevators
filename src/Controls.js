@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Menu from './Menu';
 import './Controls.css';
+import { inject } from 'mobx-react';
 
+@inject('numFloors')
 class Controls extends Component {
   constructor(props) {
     super(props);
@@ -51,9 +52,5 @@ class Controls extends Component {
     );
   }
 }
-
-Controls.propTypes = {
-  numFloors: PropTypes.number.isRequired,
-};
 
 export default Controls;

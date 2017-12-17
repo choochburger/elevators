@@ -8,7 +8,7 @@ class Building extends Component {
     return (
       <div className="building">
         {this.props.elevators.map((elevator, i) => (
-          <Shaft elevator={elevator} numFloors={this.props.numFloors} key={i} />
+          <Shaft elevator={elevator} key={i} />
         ))}
       </div>
     );
@@ -16,7 +16,6 @@ class Building extends Component {
 }
 
 Building.propTypes = {
-  numFloors: PropTypes.number.isRequired,
   elevators: PropTypes.array.isRequired,
 };
 

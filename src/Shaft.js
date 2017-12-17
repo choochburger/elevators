@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Elevator from './Elevator';
+import { inject } from 'mobx-react';
 import './Shaft.css';
 
+@inject('numFloors')
 class Shaft extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +53,6 @@ class Shaft extends Component {
 
 Shaft.propTypes = {
   elevator: PropTypes.object.isRequired,
-  numFloors: PropTypes.number.isRequired,
 };
 
 export default Shaft;
