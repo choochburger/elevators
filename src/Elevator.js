@@ -11,7 +11,7 @@ class Elevator extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.floor !== this.state.floor) {
+    if (nextProps.floor !== this.props.floor) {
       this.updatePosition(nextProps.floor);
     }
   }

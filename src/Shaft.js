@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import Elevator from './Elevator';
-import { inject } from 'mobx-react';
+import { inject, observer, PropTypes } from 'mobx-react';
 import './Shaft.css';
 
 @inject('numFloors')
+@observer
 class Shaft extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +20,7 @@ class Shaft extends Component {
   }
 
   render() {
+    const { elevator } = this.props;
     return (
       <div
         className="shaft"
@@ -28,10 +29,7 @@ class Shaft extends Component {
           height: this.state.height,
         }}
       >
-        <Elevator
-          floor={this.props.elevator.floor}
-          ref={el => (this.elevator = el)}
-        />
+        <Elevator floor={elevator.floor} ref={el => (this.elevator = el)} />
       </div>
     );
   }
@@ -52,7 +50,7 @@ class Shaft extends Component {
 }
 
 Shaft.propTypes = {
-  elevator: PropTypes.object.isRequired,
+  elevator: PropTypes.observableObject.isRequired,
 };
 
 export default Shaft;

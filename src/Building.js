@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Shaft from './Shaft';
+import { inject, observer } from 'mobx-react';
 import './Building.css';
 
+@inject('elevatorStore')
+@observer
 class Building extends Component {
   render() {
+    const elevators = this.props.elevatorStore.elevators;
     return (
       <div className="building">
-        {this.props.elevators.map((elevator, i) => (
-          <Shaft elevator={elevator} key={i} />
+        {elevators.map(elevator => (
+          <Shaft elevator={elevator} key={elevator.id} />
         ))}
       </div>
     );
   }
 }
-
-Building.propTypes = {
-  elevators: PropTypes.array.isRequired,
-};
 
 export default Building;

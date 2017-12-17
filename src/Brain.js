@@ -1,6 +1,6 @@
 class Brain {
   static isIdle(elevator) {
-    return elevator.pickupFloor === null && elevator.dropoffFloor === null;
+    return elevator.isIdle;
   }
 
   static processRequests(elevators = [], requests = []) {
@@ -18,17 +18,17 @@ class Brain {
     if (elevator.floor === elevator[field]) {
       elevator[field] = null;
     } else if (elevator.floor < elevator[field]) {
-      elevator.floor++;
+      elevator.moveUp();
     } else {
-      elevator.floor--;
+      elevator.moveDown();
     }
   }
 
   static updateElevators(elevators = []) {
     elevators.forEach(elevator => {
-      if (elevator.pickupFloor !== null) {
+      if (typeof elevator.pickupFloor === 'number') {
         return Brain.updateElevator(elevator, 'pickupFloor');
-      } else if (elevator.dropoffFloor !== null) {
+      } else if (typeof elevator.dropoffFloor === 'number') {
         return Brain.updateElevator(elevator, 'dropoffFloor');
       }
     });

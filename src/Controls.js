@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
 import './Controls.css';
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 @inject('numFloors', 'elevatorRequestStore')
+@observer
 class Controls extends Component {
   constructor(props) {
     super(props);
