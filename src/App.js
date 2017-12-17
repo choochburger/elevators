@@ -10,7 +10,7 @@ let idCounter = 0;
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = props.savedState || {
       floors: 5,
       elevators: [
         {
@@ -27,19 +27,7 @@ class App extends Component {
         },
         {
           id: 2,
-          floor: 3,
-          pickupFloor: null,
-          dropoffFloor: null,
-        },
-        {
-          id: 3,
-          floor: 2,
-          pickupFloor: null,
-          dropoffFloor: null,
-        },
-        {
-          id: 4,
-          floor: 2,
+          floor: 0,
           pickupFloor: null,
           dropoffFloor: null,
         },

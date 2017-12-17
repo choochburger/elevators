@@ -27,7 +27,7 @@ class Elevator extends Component {
   }
 
   updatePosition(floor) {
-    const height = this.el.clientHeight;
+    const height = (this.el || {}).clientHeight || 50;
     this.setState({
       bottom: floor * height,
     });

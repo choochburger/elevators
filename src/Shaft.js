@@ -35,7 +35,10 @@ class Shaft extends Component {
   }
 
   resize() {
-    const elevatorNode = ReactDOM.findDOMNode(this.elevator);
+    const elevatorNode = ReactDOM.findDOMNode(this.elevator) || {
+      clientWidth: 10,
+      clientHeight: 10,
+    };
     const elevatorWidth = elevatorNode.clientWidth;
     const elevatorHeight = elevatorNode.clientHeight;
     const shaftHeight = this.props.numFloors * elevatorHeight;

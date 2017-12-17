@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Position elevators 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="building"
+  >
+    <div
+      className="shaft"
+      style={
+        Object {
+          "height": NaN,
+          "width": undefined,
+        }
+      }
+    >
+      <div
+        className="elevator"
+        style={
+          Object {
+            "bottom": 0,
+          }
+        }
+      />
+    </div>
+    <div
+      className="shaft"
+      style={
+        Object {
+          "height": NaN,
+          "width": undefined,
+        }
+      }
+    >
+      <div
+        className="elevator"
+        style={
+          Object {
+            "bottom": 0,
+          }
+        }
+      />
+    </div>
+    <div
+      className="shaft"
+      style={
+        Object {
+          "height": NaN,
+          "width": undefined,
+        }
+      }
+    >
+      <div
+        className="elevator"
+        style={
+          Object {
+            "bottom": 150,
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="controls-container"
+  >
+    <div
+      className="controls"
+    >
+      <label>
+        Start floor
+        <select
+          onChange={[Function]}
+          value={0}
+        >
+          <option
+            val={0}
+          >
+            0
+          </option>
+          <option
+            val={1}
+          >
+            1
+          </option>
+          <option
+            val={2}
+          >
+            2
+          </option>
+          <option
+            val={3}
+          >
+            3
+          </option>
+          <option
+            val={4}
+          >
+            4
+          </option>
+        </select>
+      </label>
+      <label>
+        End floor
+        <select
+          onChange={[Function]}
+          value={0}
+        >
+          <option
+            val={0}
+          >
+            0
+          </option>
+          <option
+            val={1}
+          >
+            1
+          </option>
+          <option
+            val={2}
+          >
+            2
+          </option>
+          <option
+            val={3}
+          >
+            3
+          </option>
+          <option
+            val={4}
+          >
+            4
+          </option>
+        </select>
+      </label>
+      <button
+        className="controls-go"
+        onClick={[Function]}
+      >
+        Go!
+      </button>
+    </div>
+  </div>
+  <div
+    className="queue"
+  />
+</div>
+`;
