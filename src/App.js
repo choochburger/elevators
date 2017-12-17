@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Building from './Building';
 import Controls from './Controls';
 import Queue from './Queue';
+import Brain from './Brain';
 import './App.css';
 
 let idCounter = 0;
@@ -60,54 +61,14 @@ class App extends Component {
   }
 
   update() {
-    // TODO: move this logic into a main logic controller...
-
-    // Grab first empty elevator and send topickupFloor
-
-    const elevators = this.state.elevators.slice();
-    const requests = this.state.requests.slice();
-
-    function isIdle(elevator) {
-      return elevator.pickupFloor === null && elevator.dropoffFloor === null;
-    }
-
-    function isInTransit(elevator) {
-      return !isIdle(elevator);
-    }
-
-    // Assign idle elevators
-    elevators.filter(isIdle).forEach(elevator => {
-      if (requests.length) {
-        const request = requests.pop();
-        elevator.pickupFloor = request.pickupFloor;
-        elevator.dropoffFloor = request.dropoffFloor;
-      }
-    });
-
-    // Move assigned elevators one floor at a time
-    elevators.filter(isInTransit).forEach(elevator => {
-      if (elevator.pickupFloor !== null) {
-        if (elevator.floor === elevator.pickupFloor) {
-          elevator.pickupFloor = null;
-        } else if (elevator.floor < elevator.pickupFloor) {
-          elevator.floor++;
-        } else {
-          elevator.floor--;
-        }
-      } else if (elevator.dropoffFloor !== null) {
-        if (elevator.floor === elevator.dropoffFloor) {
-          elevator.dropoffFloor = null;
-        } else if (elevator.floor < elevator.dropoffFloor) {
-          elevator.floor++;
-        } else {
-          elevator.floor--;
-        }
-      }
-    });
+    const { elevators, requests } = Brain.processRequests(
+      this.state.elevators,
+      this.state.requests,
+    );
 
     this.setState(
       {
-        elevators: elevators,
+        elevators: Brain.updateElevators(elevators),
         requests: requests,
       },
       () => setTimeout(this.update, 1000),
