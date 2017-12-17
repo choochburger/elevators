@@ -3,46 +3,34 @@ class Brain {
     return elevator.pickupFloor === null && elevator.dropoffFloor === null;
   }
 
-  static isInTransit(elevator) {
-    return !Brain.isIdle(elevator);
-  }
-
   static processRequests(elevators = [], requests = []) {
-    const nextElevators = elevators.slice();
-    const nextRequests = requests.slice();
-
-    nextElevators.filter(Brain.isIdle).forEach(elevator => {
-      if (nextRequests.length) {
-        const request = nextRequests.pop();
+    elevators.filter(Brain.isIdle).forEach(elevator => {
+      if (requests.length) {
+        const request = requests.pop();
         elevator.pickupFloor = request.pickupFloor;
         elevator.dropoffFloor = request.dropoffFloor;
       }
     });
-
-    return { elevators: nextElevators, requests: nextRequests };
   }
 
   static updateElevator(elevator, field) {
     // Move assigned elevators one floor at a time
-    const nextElevator = Object.assign({}, elevator);
-    if (nextElevator.floor === nextElevator[field]) {
-      nextElevator[field] = null;
-    } else if (nextElevator.floor < nextElevator[field]) {
-      nextElevator.floor++;
+    if (elevator.floor === elevator[field]) {
+      elevator[field] = null;
+    } else if (elevator.floor < elevator[field]) {
+      elevator.floor++;
     } else {
-      nextElevator.floor--;
+      elevator.floor--;
     }
-    return nextElevator;
   }
 
   static updateElevators(elevators = []) {
-    return elevators.map(elevator => {
+    elevators.forEach(elevator => {
       if (elevator.pickupFloor !== null) {
         return Brain.updateElevator(elevator, 'pickupFloor');
       } else if (elevator.dropoffFloor !== null) {
         return Brain.updateElevator(elevator, 'dropoffFloor');
       }
-      return elevator;
     });
   }
 }

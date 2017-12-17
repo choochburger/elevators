@@ -3,13 +3,13 @@ import Menu from './Menu';
 import './Controls.css';
 import { inject } from 'mobx-react';
 
-@inject('numFloors')
+@inject('numFloors', 'requestStore')
 class Controls extends Component {
   constructor(props) {
     super(props);
     this.updatePickupFloor = this.updatePickupFloor.bind(this);
     this.updateDropoffFloor = this.updateDropoffFloor.bind(this);
-    this.submitRequest = this.submitRequest.bind(this);
+    this.createRequest = this.createRequest.bind(this);
     this.state = {
       pickupFloor: 0,
       dropoffFloor: 0,
@@ -24,8 +24,11 @@ class Controls extends Component {
     this.setState({ dropoffFloor: Number(e.target.value) });
   }
 
-  submitRequest() {
-    this.props.onRequest(this.state);
+  createRequest() {
+    this.props.requestStore.createRequest(
+      this.state.pickupFloor,
+      this.state.dropoffFloor,
+    );
   }
 
   render() {
@@ -44,7 +47,7 @@ class Controls extends Component {
             onChange={this.updateDropoffFloor}
             label={'End floor'}
           />
-          <button className="controls-go" onClick={this.submitRequest}>
+          <button className="controls-go" onClick={this.createRequest}>
             Go!
           </button>
         </div>
