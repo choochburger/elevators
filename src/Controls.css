@@ -20,31 +20,6 @@
   }
 }
 
-.direction-controls {
-  display: flex;
-  flex-direction: column;
-}
-
-.direction-control {
-  background-image: url('./arrow.svg');
-  border-radius: 0 12px 12px 0;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-}
-
-.direction-control-selected {
-  border-color: #2b0cea;
-}
-
-.direction-control-up {
-  transform: rotate(-90deg);
-}
-
-.direction-control-down {
-  transform: rotate(90deg);
-}
-
 .controls-go {
   width: 100px;
   height: 40px;
